@@ -1,0 +1,87 @@
+-- ====================================================================
+--    ★ GIACHUOT_ELITE_50_DATABASE_2026 ★
+-- ====================================================================
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Window = Rayfield:CreateWindow({Name = "Giachuot | 50+ Elite Collection", LoadingTitle = "Nạp 50+ Script...", ConfigurationSaving = { Enabled = true, FolderName = "Giachuot", FileName = "Master50" }})
+
+local TabsData = {
+    ["⭐ Hub Huyền Thoại"] = {
+        {"LongHiHi Hub", "https://raw.githubusercontent.com/LongHiHiHub/Main/main/Loader.lua"},
+        {"Tày Hub", "https://raw.githubusercontent.com/TayHub/Main/main/Loader.lua"},
+        {"Rubu Hub", "https://raw.githubusercontent.com/RubuHub/Main/main/Loader.lua"},
+        {"Rimuru Hub", "https://raw.githubusercontent.com/Rimuru-Hub/Main/main/Loader.lua"},
+        {"Redz Hub", "https://raw.githubusercontent.com/newredz/BloxFruits/refs/heads/main/Source.luau"},
+        {"W-Azure Hub", "https://raw.githubusercontent.com/W-Azure/Azure-Repository/main/BloxFruit.lua"},
+        {"Zen Hub", "https://raw.githubusercontent.com/Zen-Hub-Script/Main/main/Loader.lua"},
+        {"Hoho Hub", "https://raw.githubusercontent.com/acsu123/HOHO_HUBS/main/BloxFruit1"}
+    },
+    ["🔓 No Key (Cực Nhanh)"] = {
+        {"Banana Hub", "https://raw.githubusercontent.com/obiyeueim/vthangsitink/main/BananaHub.lua"},
+        {"Bacon Chest", "https://raw.githubusercontent.com/Bacon-Hub/Bacon-Hub/main/Main.lua"},
+        {"Fruit Notifier", "https://raw.githubusercontent.com/vthangsitink/Fruit-Notifier/main/FruitNotifier.lua"},
+        {"Auto Chest (Dork)", "https://raw.githubusercontent.com/dorkhub/dork/main/Main.lua"},
+        {"Simple Farm", "https://raw.githubusercontent.com/simple-farm/main/Loader.lua"},
+        {"Fast Attack Lite", "https://raw.githubusercontent.com/fast-attack/main/Loader.lua"},
+        {"Auto Mastery", "https://raw.githubusercontent.com/mastery-hub/main/Loader.lua"},
+        {"Fruit Finder", "https://raw.githubusercontent.com/fruit-finder/main/Loader.lua"},
+        {"Speedy Farm", "https://raw.githubusercontent.com/speedy-farm/main/Loader.lua"}
+    },
+    ["🚀 Cày Thuê Pro"] = {
+        {"Titan Farm", "https://raw.githubusercontent.com/Titan-Farm/Main/main/Loader.lua"},
+        {"Mega Kaitun", "https://raw.githubusercontent.com/Mega-Kaitun/Main/main/Loader.lua"},
+        {"Quantum Hub", "https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"},
+        {"AnDepZai Hub", "https://raw.githubusercontent.com/AnDepZaiHub/Main/main/Loader.lua"},
+        {"Orange Hub", "https://raw.githubusercontent.com/Orange-Hub/Main/main/Loader.lua"},
+        {"Blueberry Hub", "https://raw.githubusercontent.com/Blueberry-Hub/Main/main/Loader.lua"},
+        {"Realkid Hub", "https://raw.githubusercontent.com/realkidhub/realkid/refs/heads/main/main.lua"},
+        {"Lunar Hub", "https://raw.githubusercontent.com/Lunar-Hub/Main/main/Loader.lua"},
+        {"Nova Hub", "https://raw.githubusercontent.com/Nova-Hub/Main/main/Loader.lua"},
+        {"Ultra Farm", "https://raw.githubusercontent.com/Ultra-Hub/Main/main/Loader.lua"}
+    },
+    ["⚔️ PvP & Đấu Trường"] = {
+        {"Alchemy Hub", "https://raw.githubusercontent.com/Alchemy-Hub/Main/main/Loader.lua"},
+        {"Mukuro Hub", "https://raw.githubusercontent.com/Mukuro-Hub/Main/main/Loader.lua"},
+        {"Maki Hub", "https://raw.githubusercontent.com/Maki-Hub/Main/main/Loader.lua"},
+        {"Bounty Hunter", "https://raw.githubusercontent.com/Bounty-Hub/Main/main/Loader.lua"},
+        {"Nightmare PvP", "https://raw.githubusercontent.com/Nightmare-Hub/Main/main/Loader.lua"},
+        {"Blox PvP", "https://raw.githubusercontent.com/xIcePanda/Blox-Fruits-PvP/main/Main.lua"},
+        {"Infinity Mastery", "https://raw.githubusercontent.com/Inf-Mastery/Main/main/Loader.lua"},
+        {"Combat Master", "https://raw.githubusercontent.com/Combat-Master/Main/main/Loader.lua"},
+        {"PvP God", "https://raw.githubusercontent.com/PvP-God/Main/main/Loader.lua"},
+        {"Pro Hunter", "https://raw.githubusercontent.com/Pro-Hunter/Main/main/Loader.lua"}
+    },
+    ["🔥 Boss & Sea Event"] = {
+        {"Thunder Z Sea", "https://raw.githubusercontent.com/ThunderZ-Hub/Main/main/Loader.lua"},
+        {"Evo Hub Raid", "https://raw.githubusercontent.com/Evo-Hub/Evo-Hub/main/Main.lua"},
+        {"Dork Hub Boss", "https://raw.githubusercontent.com/dorkhub/dork/main/Main.lua"},
+        {"Sea Event Pro", "https://raw.githubusercontent.com/Sea-Event/Main/main/Loader.lua"},
+        {"Kraken Hunter", "https://raw.githubusercontent.com/Kraken-Hunter/Main/main/Loader.lua"},
+        {"Sea Destroyer", "https://raw.githubusercontent.com/Sea-Beast/Main/main/Loader.lua"},
+        {"Final Boss", "https://raw.githubusercontent.com/Final-Boss/Main/main/Loader.lua"},
+        {"Boss Killer", "https://raw.githubusercontent.com/Boss-Killer/Main/main/Loader.lua"},
+        {"Raid Master", "https://raw.githubusercontent.com/Raid-Master/Main/main/Loader.lua"},
+        {"Ocean King", "https://raw.githubusercontent.com/Ocean-King/Main/main/Loader.lua"}
+    },
+    ["🛠 Tiện Ích"] = {
+        {"V4 Gear Auto", "https://raw.githubusercontent.com/V4-Hub/Main/main/Loader.lua"},
+        {"Gravity TP", "https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua"},
+        {"Neko Hub", "https://raw.githubusercontent.com/Neko-Hub/Main/main/Loader.lua"},
+        {"Valkyrie Hub", "https://raw.githubusercontent.com/Valkyrie-Hub/Main/main/Loader.lua"},
+        {"Zenith Reborn", "https://raw.githubusercontent.com/Zenith-Reborn/Main/main/Loader.lua"},
+        {"Xero Hub", "https://raw.githubusercontent.com/Xero-Hub/Xero-Hub/main/Main.lua"},
+        {"Ghost Hub", "https://raw.githubusercontent.com/Ghost-Hub/Main/main/Loader.lua"},
+        {"Void Script", "https://raw.githubusercontent.com/Void-Script/Main/main/Loader.lua"},
+        {"Esp Script", "https://raw.githubusercontent.com/esp-hub/main/Main.lua"},
+        {"Auto Quest", "https://raw.githubusercontent.com/auto-quest/main/Loader.lua"}
+    }
+}
+
+for tabName, scripts in pairs(TabsData) do
+    local newTab = Window:CreateTab(tabName, nil)
+    for _, data in pairs(scripts) do
+        newTab:CreateButton({Name = data[1], Callback = function() pcall(function() loadstring(game:HttpGet(data[2]))() end) end})
+    end
+end
+
+Rayfield:Notify({Title = "Giachuot", Content = "Đã nạp thành công 50+ Script vào thư viện!", Duration = 5})
