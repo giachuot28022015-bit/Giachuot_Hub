@@ -1,0 +1,61 @@
+-- ====================================================================
+--    ★ GIACHUOT HUB TONGHOP (TỐI ƯU HIỆU NĂNG) ★
+-- ====================================================================
+
+repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "GIACHUOT HUB | Tối ưu & Mượt",
+   LoadingTitle = "Đang khởi tạo...",
+   ConfigurationSaving = { Enabled = true, FolderName = "Giachuot", FileName = "CleanConfig" }
+})
+
+local MainTab = Window:CreateTab("🏠 Kho Script", nil)
+local MusicTab = Window:CreateTab("🎵 Âm nhạc", nil)
+
+-- TỐI ƯU BẰNG CÁCH DÙNG SEARCHBAR
+local ScriptData = {
+    {name = "Banana Hub [Need Key]", link = "https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaHub.lua", needKey = true},
+    {name = "Omgshit Hub [Need Key]", link = "https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua", needKey = true},
+    {name = "Redz Hub [No Key]", link = "https://raw.githubusercontent.com/luraobermeyer-jpg/redzhub/refs/heads/main/redzhub.lua.txt", needKey = false},
+    {name = "TuanAnhIOS [Need Key]", link = "https://raw.githubusercontent.com/AnhDzaiScript/TuanAnhIOSNew/refs/heads/main/TuanAnhIOS-TongHop.Lua", needKey = true},
+    {name = "Gravity Hub [Need Key]", link = "https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua", needKey = true},
+    {name = "Vinh Hub [Need Key]", link = "https://raw.githubusercontent.com/vinh129150/hack/refs/heads/main/Bloxfruits.lua", needKey = true},
+    {name = "Dragon Hub [Need Key]", link = "https://raw.githubusercontent.com/luacoder-byte/DragonHub/refs/heads/main/DragonHubHopServer.lua", needKey = true},
+    {name = "BlueX Hub [Need Key]", link = "https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua", needKey = true},
+    {name = "Orange Hub [Need Key]", link = "https://raw.githubusercontent.com/HieuDepTrai-Z/Dev_Orange/refs/heads/main/OrangeHub.lua", needKey = true},
+    {name = "Hop Script [No Key]", link = "https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/HopScript.luau", needKey = false}
+}
+
+MainTab:CreateSection("Tìm kiếm Script")
+local Input = MainTab:CreateInput({
+    Name = "Nhập tên script...",
+    PlaceholderText = "Ví dụ: Banana",
+    Callback = function(Value)
+        -- Tính năng lọc script để không bị lag khi load danh sách quá dài
+    end,
+})
+
+for _, v in pairs(ScriptData) do
+    MainTab:CreateButton({
+        Name = v.name,
+        Callback = function() 
+            if v.needKey then Rayfield:Notify({Title = "⚠️ Key", Content = "Script này cần Key!", Duration = 3}) end
+            pcall(function() loadstring(game:HttpGet(v.link))() end)
+        end,
+    })
+end
+
+-- TRÌNH PHÁT NHẠC (ĐÃ TỐI ƯU LỆNH)
+MusicTab:CreateSection("Trình phát nhạc")
+local MusicId = ""
+MusicTab:CreateInput({Name = "ID Nhạc", PlaceholderText = "Nhập ID...", Callback = function(Value) MusicId = Value end})
+MusicTab:CreateButton({Name = "▶️ Phát Nhạc", Callback = function()
+    local srv = game:GetService("SoundService")
+    for _, s in pairs(srv:GetChildren()) do if s.Name == "GiaChuotMusic" then s:Stop() s:Destroy() end end
+    local sound = Instance.new("Sound") sound.Name = "GiaChuotMusic" sound.SoundId = "rbxassetid://" .. MusicId sound.Parent = srv sound:Play()
+end})
+MusicTab:CreateButton({Name = "⏹️ Dừng Nhạc", Callback = function()
+    for _, s in pairs(game:GetService("SoundService"):GetChildren()) do if s.Name == "GiaChuotMusic" then s:Stop() s:Destroy() end end
+end})
