@@ -1,0 +1,101 @@
+-- ====================================================================
+--    ★ GIACHUOT HUB TONGHOP + AUTO FILL KEY SYSTEM (CLEAN) ★
+-- ====================================================================
+
+repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer
+
+-- ================= CẤU HÌNH KEY CỦA BẠN =================
+local KEY_CHU_CUA_BAN = "GiaChuotVip123" -- Bạn muốn đặt Key là gì thì sửa chữ trong này
+
+-- TẢI THƯ VIỆN RAYFIELD
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+-- ================= BẢNG KIỂM TRA XÁC THỰC KEY =================
+local KeyWindow = Rayfield:CreateWindow({
+   Name = "🔐 GIACHUOT HUB | Hệ Thống Key",
+   LoadingTitle = "Đang kiểm tra bảo mật...",
+   ConfigurationSaving = { Enabled = false }
+})
+
+local KeyTab = KeyWindow:CreateTab("Xác Thực", nil)
+
+KeyTab:CreateSection("Bấm nút bên dưới để tự động nhập Key nhanh")
+
+-- Ô nhập Key (Sẽ tự động nhận diện khi được điền)
+local KeyInputBox = KeyTab:CreateInput({
+    Name = "Mã Key:",
+    PlaceholderText = "Nhập hoặc bấm tự động điền...",
+    Callback = function(Value)
+        if Value == KEY_CHU_CUA_BAN then
+            Rayfield:Notify({Title = "🎉 Thành Công!", Content = "Đúng Key! Đang mở khóa Giachuot Hub...", Duration = 3})
+            task.wait(1)
+            KeyWindow:Destroy() -- Đóng bảng nhập key
+            
+            -- ====================================================================
+            -- >>> MENU CHÍNH GIACHUOT HUB CHẠY Ở ĐÂY <<<
+            -- ====================================================================
+            local Window = Rayfield:CreateWindow({
+               Name = "GIACHUOT HUB | Tối ưu & Mượt",
+               LoadingTitle = "Đang khởi tạo...",
+               ConfigurationSaving = { Enabled = true, FolderName = "Giachuot", FileName = "CleanConfig" }
+            })
+
+            local MainTab = Window:CreateTab("🏠 Kho Script", nil)
+            local MusicTab = Window:CreateTab("🎵 Âm nhạc", nil)
+
+            local ScriptData = {
+                {name = "Banana Hub [Need Key]", link = "https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaHub.lua", needKey = true},
+                {name = "Omgshit Hub [Need Key]", link = "https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua", needKey = true},
+                {name = "Redz Hub [No Key]", link = "https://raw.githubusercontent.com/luraobermeyer-jpg/redzhub/refs/heads/main/redzhub.lua.txt", needKey = false},
+                {name = "TuanAnhIOS [Need Key]", link = "https://raw.githubusercontent.com/AnhDzaiScript/TuanAnhIOSNew/refs/heads/main/TuanAnhIOS-TongHop.Lua", needKey = true},
+                {name = "Gravity Hub [Need Key]", link = "https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua", needKey = true},
+                {name = "Vinh Hub [Need Key]", link = "https://raw.githubusercontent.com/vinh129150/hack/refs/heads/main/Bloxfruits.lua", needKey = true},
+                {name = "Dragon Hub [Need Key]", link = "https://raw.githubusercontent.com/luacoder-byte/DragonHub/refs/heads/main/DragonHubHopServer.lua", needKey = true},
+                {name = "BlueX Hub [Need Key]", link = "https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua", needKey = true},
+                {name = "Orange Hub [Need Key]", link = "https://raw.githubusercontent.com/HieuDepTrai-Z/Dev_Orange/refs/heads/main/OrangeHub.lua", needKey = true},
+                {name = "Hop Script [No Key]", link = "https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/HopScript.luau", needKey = false}
+            }
+
+            MainTab:CreateSection("Tìm kiếm Script")
+            local Input = MainTab:CreateInput({
+                Name = "Nhập tên script...",
+                PlaceholderText = "Ví dụ: Banana",
+                Callback = function(Value) end,
+            })
+
+            for _, v in pairs(ScriptData) do
+                MainTab:CreateButton({
+                    Name = v.name,
+                    Callback = function() 
+                        if v.needKey then Rayfield:Notify({Title = "⚠️ Key", Content = "Script này cần Key!", Duration = 3}) end
+                        pcall(function() loadstring(game:HttpGet(v.link))() end)
+                    end,
+                })
+            end
+
+            -- TRÌNH PHÁT NHẠC
+            MusicTab:CreateSection("Trình phát nhạc")
+            local MusicId = ""
+            MusicTab:CreateInput({Name = "ID Nhạc", PlaceholderText = "Nhập ID...", Callback = function(Value) MusicId = Value end})
+            MusicTab:CreateButton({Name = "▶️ Phát Nhạc", Callback = function()
+                local srv = game:GetService("SoundService")
+                for _, s in pairs(srv:GetChildren()) do if s.Name == "GiaChuotMusic" then s:Stop() s:Destroy() end end
+                local sound = Instance.new("Sound") sound.Name = "GiaChuotMusic" sound.SoundId = "rbxassetid://" .. MusicId sound.Parent = srv sound:Play()
+            end})
+            MusicTab:CreateButton({Name = "⏹️ Dừng Nhạc", Callback = function()
+                for _, s in pairs(game:GetService("SoundService"):GetChildren()) do if s.Name == "GiaChuotMusic" then s:Stop() s:Destroy() end end
+            end})
+            
+        else
+            Rayfield:Notify({Title = "❌ Sai Key!", Content = "Mã Key không chính xác, vui lòng kiểm tra lại!", Duration = 3})
+        end
+    end,
+})
+
+-- NÚT TỰ ĐỘNG ĐIỀN
+KeyTab:CreateButton({
+    Name = "⚡ TỰ ĐỘNG ĐIỀN KEY & VÀO HUB",
+    Callback = function()
+        KeyInputBox:Set(KEY_CHU_CUA_BAN)
+    end,
+})
