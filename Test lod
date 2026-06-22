@@ -1,0 +1,149 @@
+local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+local StarterGui = game:GetService("StarterGui")
+
+-- // --- 1. HÀM LOAD MENU CHÍNH ---
+local function LoadMainHub()
+    local OpenBtn = Instance.new("ImageButton", ScreenGui)
+    OpenBtn.Size = UDim2.new(0, 50, 0, 50)
+    OpenBtn.Position = UDim2.new(0.02, 0, 0.85, 0)
+    OpenBtn.Image = "rbxthumb://type=Asset&id=134345685698192&w=150&h=150"
+    OpenBtn.Draggable = true
+    Instance.new("UICorner", OpenBtn).CornerRadius = UDim.new(1, 0)
+
+    local Main = Instance.new("Frame", ScreenGui)
+    Main.Name = "Main"
+    Main.Size = UDim2.new(0, 550, 0, 380)
+    Main.Position = UDim2.new(0.5, -275, 0.5, -190)
+    Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    Main.BackgroundTransparency = 0.2
+    Main.Visible = false
+    Main.Active = true
+    Main.Draggable = true
+    Instance.new("UICorner", Main).CornerRadius = UDim.new(0, 10)
+
+    OpenBtn.MouseButton1Click:Connect(function() Main.Visible = not Main.Visible end)
+
+    local SearchContainer = Instance.new("Frame", Main)
+    SearchContainer.Size = UDim2.new(0.3, 0, 0, 30)
+    SearchContainer.Position = UDim2.new(0.02, 0, 0.05, 0)
+    SearchContainer.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    Instance.new("UICorner", SearchContainer).CornerRadius = UDim.new(0, 6)
+
+    local Search = Instance.new("TextBox", SearchContainer)
+    Search.Size = UDim2.new(0.9, 0, 1, 0)
+    Search.Position = UDim2.new(0.05, 0, 0, 0)
+    Search.PlaceholderText = "Search..."
+    Search.BackgroundTransparency = 1
+    Search.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+    local Sidebar = Instance.new("ScrollingFrame", Main)
+    Sidebar.Size = UDim2.new(0.3, 0, 0.8, 0)
+    Sidebar.Position = UDim2.new(0.02, 0, 0.15, 0)
+    Sidebar.BackgroundTransparency = 1
+    Sidebar.ScrollBarThickness = 2
+    local Layout = Instance.new("UIListLayout", Sidebar)
+    Layout.Padding = UDim.new(0, 8)
+
+    local function CreateTab(Name)
+        local btn = Instance.new("TextButton", Sidebar)
+        btn.Size = UDim2.new(0.9, 0, 0, 35)
+        btn.Text = "        " .. Name
+        btn.TextXAlignment = Enum.TextXAlignment.Left
+        btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        btn.BackgroundTransparency = 1
+        
+        local Indicator = Instance.new("Frame", btn)
+        Indicator.Size = UDim2.new(0, 4, 0.6, 0)
+        Indicator.Position = UDim2.new(0, 0, 0.2, 0)
+        Indicator.BackgroundColor3 = Color3.fromRGB(255, 200, 0)
+        Indicator.Visible = false
+        Instance.new("UICorner", Indicator).CornerRadius = UDim.new(1, 0)
+        
+        btn.MouseButton1Click:Connect(function()
+            for _, child in pairs(Sidebar:GetChildren()) do
+                if child:IsA("TextButton") then 
+                    child:FindFirstChildOfClass("Frame").Visible = false 
+                end
+            end
+            Indicator.Visible = true
+        end)
+    end
+
+    local Tabs = {"Shop", "Status And Server", "LocalPlayer", "Setting Farm", "Hold and Select Skill", "Farming", "Stack Farming", "Farming Other", "Fruit and Raid, Dungeon", "Sea Event", "Settings"}
+    for _, name in pairs(Tabs) do CreateTab(name) end
+
+    Layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        Sidebar.CanvasSize = UDim2.new(0, 0, 0, Layout.AbsoluteContentSize.Y + 10)
+    end)
+end
+
+-- // --- 2. GIAO DIỆN KEY SYSTEM ---
+local KeyFrame = Instance.new("Frame", ScreenGui)
+KeyFrame.Name = "KeyFrame"
+KeyFrame.Size = UDim2.new(0, 450, 0, 260)
+KeyFrame.Position = UDim2.new(0.5, -225, 0.5, -130)
+KeyFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+KeyFrame.BackgroundTransparency = 0.4
+Instance.new("UICorner", KeyFrame).CornerRadius = UDim.new(0, 15)
+
+local SideLogo = Instance.new("ImageLabel", KeyFrame)
+SideLogo.Size = UDim2.new(0, 80, 0, 80)
+SideLogo.Position = UDim2.new(0.05, 0, 0.3, 0)
+SideLogo.Image = "rbxthumb://type=Asset&id=134345685698192&w=150&h=150"
+SideLogo.BackgroundTransparency = 1
+
+local Title = Instance.new("TextLabel", KeyFrame)
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.Position = UDim2.new(0, 0, 0.05, 0)
+Title.Text = "Giachuothub - Key System"
+Title.TextColor3 = Color3.fromRGB(255, 200, 0)
+Title.Font = Enum.Font.SourceSansItalic
+Title.TextSize = 22
+Title.BackgroundTransparency = 1
+
+local KeyInput = Instance.new("TextBox", KeyFrame)
+KeyInput.Size = UDim2.new(0.5, 0, 0, 40)
+KeyInput.Position = UDim2.new(0.4, 0, 0.3, 0)
+KeyInput.PlaceholderText = "Nhập Key..."
+KeyInput.Font = Enum.Font.SourceSansItalic
+KeyInput.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+KeyInput.TextColor3 = Color3.new(1,1,1)
+Instance.new("UICorner", KeyInput).CornerRadius = UDim.new(0, 8)
+
+local SubmitBtn = Instance.new("TextButton", KeyFrame)
+SubmitBtn.Size = UDim2.new(0.5, 0, 0, 40)
+SubmitBtn.Position = UDim2.new(0.4, 0, 0.48, 0)
+SubmitBtn.Text = "SUBMIT KEY"
+SubmitBtn.Font = Enum.Font.SourceSansItalic
+SubmitBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 0)
+Instance.new("UICorner", SubmitBtn).CornerRadius = UDim.new(0, 8)
+
+local GetKeyBtn = Instance.new("TextButton", KeyFrame)
+GetKeyBtn.Size = UDim2.new(0.5, 0, 0, 40)
+GetKeyBtn.Position = UDim2.new(0.4, 0, 0.68, 0)
+GetKeyBtn.Text = "GET KEY"
+GetKeyBtn.Font = Enum.Font.SourceSansItalic
+GetKeyBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+GetKeyBtn.TextColor3 = Color3.new(1,1,1)
+Instance.new("UICorner", GetKeyBtn).CornerRadius = UDim.new(0, 8)
+
+-- // --- 3. LOGIC XÁC THỰC ---
+GetKeyBtn.MouseButton1Click:Connect(function()
+    setclipboard("https://link4sub.com/Bo0Pj54cfq")
+    StarterGui:SetCore("SendNotification", {Title="Thông báo", Text="Đã copy link get key!", Duration=3})
+end)
+
+SubmitBtn.MouseButton1Click:Connect(function()
+    SubmitBtn.Text = "ĐANG CHECK..."
+    local url = "https://giachuothub-key-sever.vercel.app/api/check-key?key=" .. KeyInput.Text
+    local success, response = pcall(function() return game:HttpGet(url) end)
+    
+    if success and string.find(string.lower(tostring(response)), "true") then
+        StarterGui:SetCore("SendNotification", {Title="Thành công", Text="Xác thực key thành công✅", Duration=3})
+        KeyFrame:Destroy()
+        LoadMainHub()
+    else
+        SubmitBtn.Text = "SUBMIT KEY"
+        StarterGui:SetCore("SendNotification", {Title="Thông báo", Text="Key sai hoặc đã hết hạn❌", Duration=3})
+    end
+end)
